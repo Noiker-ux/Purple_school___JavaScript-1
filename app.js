@@ -1,14 +1,12 @@
-const answer = prompt('Сколько будет 7 + или - 15?');
-switch (answer) {
-    case '-8':
-    case '22': 
-    case 'Я не робот':
-        console.log('Успех');
-        break;
-    default:
-        console.log('Вы робот');
-        break;
+let balance = 2000;
+let bonusBalance = 100;
+let isBanned = false;
+let isExist = true;
+let isSelling = true;
+
+if ((balance>1000 || bonusBalance>100) && (isBanned==false) && (isExist==true) && (isSelling==true)) {
+    console.log('Вы можете купить игру');
+} else {
+    console.log('Вы не можете купить игру');
 }
-
-
     
