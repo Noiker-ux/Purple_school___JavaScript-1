@@ -1,39 +1,27 @@
-const bigCredit = (ageUser, workUser, moneyUser) => {
-    if (Number(ageUser)>24 && workUser===true){
-        moneyUser+=500;
-    };
-    return moneyUser;
+const tasks = ['Задача 1','Задача 2','Задача 3'];
+
+const addNewTask = (newTask) =>{
+    tasks.push(newTask);
+    console.log (tasks);
+    return tasks;
 };
 
-const smallCredit = (ageUser, moneyUser) => {
-    if (Number(ageUser)>24){
-        moneyUser+=100;
-    };
-    return moneyUser;
+const deleteTask = (deleteTask) =>{
+    tasks.splice(tasks.indexOf(deleteTask),1);
+    console.log(tasks);
+    return tasks;
 };
 
-const checkBuy = (moneyUser, priceMac) => {
-    if (Number(moneyUser)>=Number(priceMac)){
-        return true;
-    } else {
-        return false;
-    }
+const warningTask = (warnTask) => {
+    let haveTask = tasks.splice(tasks.indexOf(warnTask),1);
+    tasks.unshift(haveTask[0]);
+    console.log(tasks);
+    return tasks;
 };
 
-const buyMac = (ageUser, moneyUser, workUser, priceMac) => {
-    if (checkBuy(moneyUser,priceMac)){
-        console.log('Можно купить без кредитов');
-        return true;
-    } else if (checkBuy (smallCredit(ageUser, moneyUser), priceMac )) {
-        console.log('Можно купить c маленьким кредитом');
-        return true;
-    } else if (checkBuy (bigCredit(ageUser, workUser, moneyUser),priceMac)) {
-        console.log('Можно купить c большим кредитом');
-        return true;
-    } else {
-        console.log('Невозможно купить');
-        return false;
-    }
-};
-
-console.log(buyMac(32,1400,true,2000));
+let newTask = prompt('Добавить новую задачу');
+addNewTask(newTask);
+let dropTask = prompt('Удалить задачу');
+deleteTask(dropTask);
+let warnTask = prompt('Сделать пометку важеное');
+warningTask(warnTask);
