@@ -1,12 +1,51 @@
-const arr = ['!', 'JS', 'люблю', 'Я'];
-let stroka='';
+const operation = [1000, -700, 300, -10000, 500];
+const startBalance = 500;
 
-for (let i=arr.length-1; i>-1; i--){
-    if ((arr[i]=='!') || (arr[i]=='.') || (arr[i]=='?')){
-        stroka=stroka.slice(0, -1);
-        stroka+=arr[i]+' ';
+const itogBalance = (startBalance, operation) => {
+    let finallBalance = startBalance;
+    for (let element of operation){
+        finallBalance+=element;
+    }
+    console.log(finallBalance);
+    return finallBalance;
+};
+
+const minusBalance = (startBalance, operation) =>{
+let finallBalance = startBalance;
+    for (let i=0;i<operation.length;i++){
+        if (finallBalance<0){
+            break;
+        } else {
+            finallBalance+=operation[i];
+        }
+    };
+    if (finallBalance<0){
+        console.log(false);
+        return false;
     } else {
-    stroka+=arr[i]+' ';
+        return finallBalance;
     }
 }
-console.log(stroka);
+
+const KPD = (operation) =>{
+    let plusBalanses = minusBalances = i = j = 0;
+    let sredPokazatel = [];
+    for (let element of operation){
+        if(element>=0){
+            plusBalanses+=element;
+            i++;
+        } else {
+            minusBalances+=element;
+            j++;
+        }
+    }
+    sredPokazatel.push(plusBalanses/i);
+    sredPokazatel.push(minusBalances/j);
+    console.log(`Средний доход ${sredPokazatel[0]}$`);
+    console.log(`Средний расход ${sredPokazatel[1]}$`);
+    return sredPokazatel;
+};
+
+itogBalance(startBalance, operation);
+minusBalance(startBalance, operation);
+KPD(operation);
