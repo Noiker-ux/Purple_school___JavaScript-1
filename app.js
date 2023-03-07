@@ -1,14 +1,12 @@
-const urlAdress = 'http://purpleschool.ru/course/javascript';
+const arr = ['!', 'JS', 'люблю', 'Я'];
+let stroka='';
 
-function destructurisationUrl(urlAdress) {
-    const destructurisationUrlArray = urlAdress.split('/');
-    let [protocol , _ , adress,...other] = destructurisationUrlArray;
-    if (protocol === 'https:' || protocol === 'http:'){
-        console.log(`Доменное имя: ${protocol.slice(0,-1)}\nДоменное имя: ${adress}\nПуть: ${'/'+other.join('/')}`);
-        return destructurisationUrlArray;
+for (let i=arr.length-1; i>-1; i--){
+    if ((arr[i]=='!') || (arr[i]=='.') || (arr[i]=='?')){
+        stroka=stroka.slice(0, -1);
+        stroka+=arr[i]+' ';
     } else {
-        console.log('Это не URL');
-        return;
+    stroka+=arr[i]+' ';
     }
-};
-destructurisationUrl(urlAdress);
+}
+console.log(stroka);
