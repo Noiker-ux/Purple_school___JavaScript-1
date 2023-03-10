@@ -1,47 +1,33 @@
-/* верные */
-const num1 = '89103235356';
-const num2 = '+79103235356';
-const num3 = '+7(910)3235356';
-const num4 = '+7(910) 323-53-56';
-const num5 = ' +7(910) 323-53-56 ';
-/* не верные */
-const num1Error = '89103235';
-const num2Error = '+7d910d323-53-56';
-const num3Error = '9+7103235356';
-const num4Error = '89103g35356';
+/* Реализовать методы увеличения и уменьшения баланса,
+при котором каждая операция сохраняется в массив
+operations в виде { reason: 'Оплата налогов', sum: -100 }.
+Возвращается true, если успешно и false, если не зватает баланса.
+Также реализовать метод вывода числа операций по кошельку
+*/
 
-
-const trueNumber = (telNumber) => {
-    let helper, helper1;
-    telNumber = telNumber.trim();
-    telNumber = telNumber.replaceAll('(','');
-    telNumber = telNumber.replaceAll(')','');
-    telNumber = telNumber.replaceAll('-','');
-    telNumber = telNumber.replaceAll(' ','');
-
-    if (telNumber.startsWith('+7')){
-        telNumber = telNumber.replaceAll('+7','8');
-    };
-
-    if((telNumber.length==11) && (telNumber.startsWith('8')) && !(isNaN(telNumber))){
-        return true;
-    }else{
-        return false;
+const wallet = {
+    balance: 0,
+    operations: [],
+    upMoney: function(reason, money){
+        this.operations.push({
+            reason: reason,
+            plata: money
+        });
+        this.balance+=money;
+        return `Деньги внесены. Баланс: ${this.balance}$`
+    },
+    downMoney: function(reason, money){
+        if(this.balance+money<0){
+            return `Недостаточное средств: ${this.balance+money}$`;
+        } else {
+            this.upMoney(reason,money);
+        }
+    },
+    countOperation(){
+       return `Количество операций банковской карты: ${this.operations.length}`;
     }
-
-
-    
 };
-
-console.log(trueNumber(num1));
-console.log(trueNumber(num2));
-console.log(trueNumber(num3));
-console.log(trueNumber(num4));
-console.log(trueNumber(num5));
-
-console.log('=====================')
-// //
-console.log(trueNumber(num1Error));
-console.log(trueNumber(num2Error));
-console.log(trueNumber(num3Error));
-console.log(trueNumber(num4Error));
+console.log(wallet.upMoney('Зарплата',15000));
+console.log(wallet.downMoney('Заправка',-22000));
+console.log(wallet.countOperation());
+console.log(wallet);
