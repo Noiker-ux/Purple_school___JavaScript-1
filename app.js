@@ -1,33 +1,49 @@
-/* Реализовать методы увеличения и уменьшения баланса,
-при котором каждая операция сохраняется в массив
-operations в виде { reason: 'Оплата налогов', sum: -100 }.
-Возвращается true, если успешно и false, если не зватает баланса.
-Также реализовать метод вывода числа операций по кошельку
-*/
-
-const wallet = {
-    balance: 0,
-    operations: [],
-    upMoney: function(reason, money){
-        this.operations.push({
-            reason: reason,
-            plata: money
-        });
-        this.balance+=money;
-        return `Деньги внесены. Баланс: ${this.balance}$`
+const warehouse = {
+    goods: [],
+    findGoodById: function(idTovara){
+        return this.goods.find(el=>{return el.id==idTovara});
     },
-    downMoney: function(reason, money){
-        if(this.balance+money<0){
-            return `Недостаточное средств: ${this.balance+money}$`;
-        } else {
-            this.upMoney(reason,money);
-        }
+    addGood: function(tovar){
+        this.goods.push(tovar);
     },
-    countOperation(){
-       return `Количество операций банковской карты: ${this.operations.length}`;
+    getWeight: function(){
+        let abs = 0
+            this.goods
+            .forEach(el => {
+                if (el?.weight?.kg){
+                    abs+=el.weight.kg;
+                }
+            })
+            return abs;
     }
+}
+
+
+const car = {
+    id: 1,
+    weight: {
+        kg: 1000
+    },
+    brand: 'Ford'
 };
-console.log(wallet.upMoney('Зарплата',15000));
-console.log(wallet.downMoney('Заправка',-22000));
-console.log(wallet.countOperation());
-console.log(wallet);
+
+const chair = {
+    id: 2,
+    weight: {
+        kg: 500
+    },
+}
+const paper ={
+    id: 3,
+    color: 'red'
+}
+
+warehouse.addGood(chair);
+warehouse.addGood(car);
+warehouse.addGood(paper);
+
+
+
+console.log(warehouse);
+console.log(warehouse.getWeight());
+console.log(warehouse.findGoodById(2));
